@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nodejs-app
+spec:
+  selector:
+    app: my-nodejs-app
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000

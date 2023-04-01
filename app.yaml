@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app-deployment
+  labels:
+    app: node-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:
+      labels:
+        app: node-app
+    spec:
+      containers:
+        - name: node-app
+          image: optimaltech/my-image-name
+          ports:
+            - containerPort: 3000
+              name: http
+          env:
+            - name: NODE_ENV
+              value: "test"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-app-service
+spec:
+  selector:
+    app: node-app
+  ports:
+    - name: http
+      port: 3000
+      targetPort: http
+      nodePort: 30001
+  type: NodePort
