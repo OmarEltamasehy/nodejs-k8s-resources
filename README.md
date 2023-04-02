@@ -126,3 +126,24 @@ Note that you'll need to replace your-docker-image with the name of your Docker 
       docker tag newapp your-dockerhub-username/newapp:v1
       docker login
       docker push your-dockerhub-username/newapp:v1
+
+# Installing the nginx ingress controller 
+Install the NGINX ingress controller in your cluster. You can use the official Helm chart provided by NGINX.
+or 
+helm install nginx-ingress ingress-nginx/ingress-nginx --namespace ingress-nginx --set controller.publishService.enabled=true
+
+# Create test and uat k8s namespaces
+kubectl create ns test 
+kubectl create ns uat
+
+# Deploying the k8s components to the namespaces 
+kubectl apply -f test-service.yaml -n test
+kubectl apply -f test-service.yaml -n test
+kubectl apply -f test-service.yaml -n test
+
+kubectl apply -f uat-service.yaml -n uat
+kubectl apply -f uat-service.yaml -n uat
+kubectl apply -f uat-service.yaml -n uat
+
+# DNS configuration
+Create DNS records for each subdomain pointing to the IP address of your ingress controller's load balancer or NodePort service.

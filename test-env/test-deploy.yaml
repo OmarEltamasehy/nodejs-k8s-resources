@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-nodejs-app
+  name: test-nodejs-app
+  namespace: test
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-nodejs-app
+      app: test-nodejs-app
   template:
     metadata:
       labels:
-        app: my-nodejs-app
+        app: test-nodejs-app
     spec:
       containers:
-        - name: my-nodejs-app
+        - name: test-nodejs-app
           image: omareltamasehy/newapp:v1
           env:
             - name: NODE_ENV
