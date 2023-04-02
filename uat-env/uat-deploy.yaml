@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: uat-nodejs-app
+  namespace: uat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: uat-nodejs-app
+  template:
+    metadata:
+      labels:
+        app: uat-nodejs-app
+    spec:
+      containers:
+        - name: uat-nodejs-app
+          image: omareltamasehy/newapp:v1
+          env:
+            - name: NODE_ENV
+              value: production
+          ports:
+            - containerPort: 3000
